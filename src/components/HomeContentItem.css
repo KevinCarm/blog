@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 300px;
+    margin-right: 300px;
 }
 
 .container_writter {
@@ -20,6 +21,8 @@ img {
 .post_img {
     border-radius: 10px;
     width: 500px;
+    margin-left: 40px;
+    margin-top: 20px;
     height: 700px;
 }
 
@@ -35,6 +38,12 @@ hr {
 @media (max-width: 620px) {
     .container_item {
         margin-left: 0;
+    }
+    .post_img {
+        margin-left: 0
+    }
+    p {
+        max-width: 100%;
     }
     hr {
         width: 100%;
