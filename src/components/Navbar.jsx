@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import "bulma/css/bulma.css";
 import logo from "../assets/twitter.svg";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const [menuClick, setMenuClick] = useState(false);
@@ -15,8 +16,12 @@ const Navbar = () => {
 
     const mobileMenu = (
         <div class='navbar-start mt-6'>
-            <a class='navbar-item'>Home</a>
-            <a class='navbar-item mt-2'>Profile</a>
+            <a class='navbar-item'>
+                <NavLink to='/home' >Home</NavLink>
+            </a>
+            <a class='navbar-item'>
+                <NavLink to='/profile' >Profile</NavLink>
+            </a>
 
             <div class='navbar-end'>
                 <div class='navbar-item'>
@@ -56,9 +61,13 @@ const Navbar = () => {
 
                 <div id='navbarBasicExample' class='navbar-menu'>
                     <div class='navbar-start'>
-                        <a class='navbar-item'>Home</a>
+                        <a class='navbar-item'>
+                            <NavLink to='/home' >Home</NavLink>
+                        </a>
 
-                        <a class='navbar-item'>Profile</a>
+                        <a class='navbar-item'>
+                            <NavLink to='/profile' >Profile</NavLink>
+                        </a>
                     </div>
 
                     <div class='navbar-end'>
