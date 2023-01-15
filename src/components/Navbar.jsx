@@ -15,17 +15,19 @@ const Navbar = () => {
     };
 
     const mobileMenu = (
-        <div class='navbar-start mt-6'>
-            <a class='navbar-item'>
-                <NavLink to='/home' >Home</NavLink>
-            </a>
-            <a class='navbar-item'>
-                <NavLink to='/profile' >Profile</NavLink>
-            </a>
+        <div class='navbar-start mt-6 box'>
+            <div>
+                <a class='navbar-item'>
+                    <NavLink to='/home'>Home</NavLink>
+                </a>
+                <a class='navbar-item'>
+                    <NavLink to='/profile'>Profile</NavLink>
+                </a>
+            </div>
 
-            <div class='navbar-end'>
-                <div class='navbar-item'>
-                    <div class='buttons'>
+            <div class='navbar-end mt-6'>
+                <div class='navbar-item '>
+                    <div class='buttons is-flex-direction-row is-justify-content-center'>
                         <a class='button is-primary'>
                             <strong>Sign up</strong>
                         </a>
@@ -62,11 +64,11 @@ const Navbar = () => {
                 <div id='navbarBasicExample' class='navbar-menu'>
                     <div class='navbar-start'>
                         <a class='navbar-item'>
-                            <NavLink to='/home' >Home</NavLink>
+                            <NavLink to='/home'>Home</NavLink>
                         </a>
 
                         <a class='navbar-item'>
-                            <NavLink to='/profile' >Profile</NavLink>
+                            <NavLink to='/profile'>Profile</NavLink>
                         </a>
                     </div>
 
