@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.container .home_title {
+    width: 100px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card_container {
+    width: 50%;
+}
+
+@media (max-width: 720px) {
+    .card_container {
+        width: 100%;
+    }
+}
