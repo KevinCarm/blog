@@ -6,6 +6,10 @@
     margin-right: 300px;
 }
 
+img {
+    cursor: pointer;
+}
+
 .container_writter {
     display: flex;
     align-items: center;
