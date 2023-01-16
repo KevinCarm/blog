@@ -1,22 +1,36 @@
 import "bulma/css/bulma.css";
 import "./HomeContentItem.css";
 import profile from "../assets/profile.jpg";
-import post from "../assets/post.jpeg";
 import favoriteOff from "../assets/favorite_off.png";
 import favoriteOn from "../assets/favorite_on.png";
 import comments from "../assets/comments.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomeContentItem = props => {
     const post = props.data;
+    const initialFavs = props.data.favs;
+
     const [isFavoriteClick, setIsFavoriteClick] = useState(false);
+    const [favsCount, setFavsCount] = useState(initialFavs);
+    const [favsIsTouched, setFavsIsTouched] = useState(false);
 
     const onFavoriteClickHandler = () => {
         setIsFavoriteClick(prev => !prev);
+        setFavsIsTouched(true);
     };
 
+    useEffect(() => {
+        if (favsIsTouched) {
+            if (isFavoriteClick) {
+                setFavsCount(c => c + 1);
+            } else {
+                setFavsCount(c => c - 1);
+            }
+        }
+    }, [isFavoriteClick]);
+
     return (
-        <div className="container">
+        <div className='container'>
             <div className='container_item'>
                 <div>
                     <div className='container_writter'>
@@ -52,7 +66,7 @@ const HomeContentItem = props => {
                                 />
                             </div>
                             <div className='column'>
-                                <p>654</p>
+                                <p>{favsCount}</p>
                             </div>
                         </div>
                         <div className='ml-3 columns'>
