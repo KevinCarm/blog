@@ -28,10 +28,10 @@ const Navbar = () => {
             <div class='navbar-end mt-6'>
                 <div class='navbar-item '>
                     <div class='buttons is-flex-direction-row is-justify-content-center'>
-                        <a class='button is-primary'>
+                        <a class='button is-success is-light is-rounded'>
                             <strong>Sign up</strong>
                         </a>
-                        <a class='button is-light'>Log in</a>
+                        <a class='button is-info is-light is-rounded'>Log in</a>
                     </div>
                 </div>
             </div>
@@ -75,10 +75,10 @@ const Navbar = () => {
                     <div class='navbar-end'>
                         <div class='navbar-item'>
                             <div class='buttons'>
-                                <a class='button is-primary'>
+                                <a class='button is-success is-light is-rounded'>
                                     <strong>Sign up</strong>
                                 </a>
-                                <a class='button is-light'>Log in</a>
+                                <a class='button is-info is-light is-rounded'>Log in</a>
                             </div>
                         </div>
                     </div>
