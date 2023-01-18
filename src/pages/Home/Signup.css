@@ -1,5 +1,6 @@
 .main_container {
     width: 50%;
+    border-radius: 10px;
 }
 
 .input_container {
