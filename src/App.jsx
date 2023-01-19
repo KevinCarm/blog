@@ -4,13 +4,14 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import "./App.css";
 import Signup from "./pages/Home/Signup";
+import Login from "./pages/Home/Login";
 
 function App() {
     const location = useLocation();
     const [isSignupPage, setIsSignupPage] = useState(false);
 
     useEffect(() => {
-        if (location.pathname === "/signup") {
+        if (location.pathname === "/signup" || location.pathname === "/login") {
             setIsSignupPage(true);
         } else {
             setIsSignupPage(false);
@@ -29,6 +30,9 @@ function App() {
                 </Route>
                 <Route path='/signup'>
                     <Signup />
+                </Route>
+                <Route path='/login'>
+                    <Login />
                 </Route>
                 <Route path='/profile'>
                     <h2>Profile</h2>

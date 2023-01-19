@@ -31,7 +31,9 @@ const Navbar = () => {
                         <a class='button is-success is-light is-rounded'>
                             <Link to='/signup'>Sign up</Link>
                         </a>
-                        <a class='button is-info is-light is-rounded'>Log in</a>
+                        <a class='button is-info is-light is-rounded'>
+                            <Link to='/login'>Login</Link>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -79,7 +81,7 @@ const Navbar = () => {
                                     <Link to='/signup'>Sign up</Link>
                                 </a>
                                 <a class='button is-info is-light is-rounded'>
-                                    Log in
+                                    <Link to='/login'>Login</Link>
                                 </a>
                             </div>
                         </div>
