@@ -22,7 +22,7 @@ const HomePost = () => {
         const formData = new FormData();
         formData.append("file", fileValue);
         formData.append("content", postContent);
-        fetch("http://localhost:8080/upload", {
+        fetch("http://localhost:8080/post", {
             method: "POST",
             body: formData,
             headers: {
@@ -34,7 +34,6 @@ const HomePost = () => {
     };
 
     const onFileChangeHandler = event => {
-        console.log(event.target.files[0]);
         setFileValue(event.target.files[0]);
     };
 
