@@ -1,8 +1,13 @@
 import "bulma/css/bulma.css";
 import "./Login.css";
 import { Fragment, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { dataActions } from "../../store/dataSlice";
+
+const LOGIN_URL = "http://localhost:8080/login";
 
 const Login = () => {
+    const dispatch = useDispatch();
     const emailRef = useRef();
     const passwordRef = useRef();
 
@@ -19,16 +24,49 @@ const Login = () => {
         const passwordValue = passwordRef.current.value;
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
+        let emailIsValid = false;
+        let passwordIsValid = false;
+
         if (passwordValue && passwordValue.length >= 8) {
             setIsPasswordValid(true);
+            passwordIsValid = true;
         } else {
             setIsPasswordValid(false);
+            passwordIsValid = false;
         }
 
         if (emailValue && reg.test(emailValue)) {
             setIsEmailValid(true);
+            emailIsValid = true;
         } else {
             setIsEmailValid(false);
+            emailIsValid = false;
+        }
+
+        if (emailIsValid && passwordIsValid) {
+            fetch(LOGIN_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: emailValue,
+                    password: passwordValue,
+                }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        setShowAlert(true);
+                    }
+                })
+                .then(json => {
+                    console.log(json.token);
+                    dispatch(dataActions.saveJwt(json.token));
+                })
+                .catch(err => {
+                    setShowAlert(true);
+                    console.log(err);
+                });
         }
     };
 
