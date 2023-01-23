@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import "bulma/css/bulma.css";
-import logo from "../assets/twitter.svg";
+import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -31,7 +31,9 @@ const Navbar = () => {
                         <a class='button is-success is-light is-rounded'>
                             <Link to='/signup'>Sign up</Link>
                         </a>
-                        <a class='button is-info is-light is-rounded'>Log in</a>
+                        <a class='button is-info is-light is-rounded'>
+                            <Link to='/login'>Login</Link>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -42,8 +44,8 @@ const Navbar = () => {
         <Fragment>
             <nav class='navbar' role='navigation' aria-label='main navigation'>
                 <div class='navbar-brand'>
-                    <a class='navbar-item' href='https://bulma.io'>
-                        <img src={logo} width='112' height='28' />
+                    <a class='navbar-item' style={{ width: "65px", height: "65px" }}>
+                        <img src={logo} style={{ width: "65px", height: "65px" }} />
                     </a>
 
                     <a
@@ -79,7 +81,7 @@ const Navbar = () => {
                                     <Link to='/signup'>Sign up</Link>
                                 </a>
                                 <a class='button is-info is-light is-rounded'>
-                                    Log in
+                                    <Link to='/login'>Login</Link>
                                 </a>
                             </div>
                         </div>

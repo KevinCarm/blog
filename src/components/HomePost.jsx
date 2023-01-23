@@ -5,18 +5,36 @@ import photoIcon from "../assets/photo.png";
 
 const HomePost = () => {
     const [isPostValid, setIsPostValid] = useState(false);
+    const [fileValue, setFileValue] = useState("");
+    const [postContent, setPostContent] = useState("");
 
     const onPostChangeHandler = event => {
         const postValue = event.target.value;
         if (!postValue || postValue.length === 0) {
             setIsPostValid(false);
         } else {
+            setPostContent(postValue);
             setIsPostValid(true);
         }
     };
 
     const onPostClickHandler = () => {
-        console.log("Click");
+        const formData = new FormData();
+        formData.append("file", fileValue);
+        formData.append("content", postContent);
+        fetch("http://localhost:8080/post", {
+            method: "POST",
+            body: formData,
+            headers: {
+                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJST0xFUyI6WyJST0xFX1VTRVIiXSwic3ViIjoia2V2aW5AZW1haWwuY29tIiwiaWF0IjoxNjc0MzI3ODk5LCJleHAiOjE2NzQzNTY2OTl9.y3_mKswGr0r8ZYRFtkIQQ_OiDr-7RUlrkNGxc90nIME`,
+            },
+        }).then(res => {
+            console.log(res);
+        });
+    };
+
+    const onFileChangeHandler = event => {
+        setFileValue(event.target.files[0]);
     };
 
     return (
@@ -61,6 +79,7 @@ const HomePost = () => {
                                         }}
                                     />
                                     <input
+                                        onChange={onFileChangeHandler}
                                         type='file'
                                         style={{
                                             cursor: "pointer",
