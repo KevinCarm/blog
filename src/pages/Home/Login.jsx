@@ -1,5 +1,6 @@
 import "bulma/css/bulma.css";
 import "./Login.css";
+import logo from "../../assets/logo.png";
 import { Fragment, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../../store/dataSlice";
@@ -89,6 +90,9 @@ const Login = () => {
                 className='container main_container box'
             >
                 <div className='is-flex is-flex-direction-column input_container'>
+                    <div className="is-flex is-justify-content-center mb-6">
+                        <img style={{width: '65px', height: '65px'}} src={logo} />
+                    </div>
                     <div>
                         <h3 className='mb-4'>Login</h3>
                     </div>
