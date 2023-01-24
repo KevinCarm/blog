@@ -93,6 +93,19 @@ const HomePost = () => {
                                     />
                                 </div>
                                 <div>
+                                    {fileValue && fileValue !== "" ? (
+                                        <img
+                                            style={{
+                                                borderRadius: "0",
+                                                width: "100px",
+                                                height: "100px",
+                                            }}
+                                            src={URL.createObjectURL(fileValue)}
+                                            alt=''
+                                        />
+                                    ) : null}
+                                </div>
+                                <div>
                                     <button
                                         onClick={onPostClickHandler}
                                         className='button is-primary is-rounded'
