@@ -81,6 +81,11 @@ const HomeContentItem = props => {
                                 <p>{post.comments}</p>
                             </div>
                         </div>
+                        <div className="ml-6 columns" style={{width: '200px'}}>
+                            <div className="column is-flex is-flex-direction-row-reverse">
+                                <p>2022-12-05</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
