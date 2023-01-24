@@ -65,6 +65,7 @@ const Login = () => {
                 .then(json => {
                     console.log(json.token);
                     dispatch(dataActions.saveJwt(json.token));
+                    dispatch(dataActions.saveIsAuthenticated(true));
                     history.push("/home");
                 })
                 .catch(err => {
