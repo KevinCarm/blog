@@ -6,9 +6,14 @@ import favoriteOn from "../assets/favorite_on.png";
 import comments from "../assets/comments.png";
 import { useEffect, useState } from "react";
 
+const FILE_URL = "http://localhost:8080/file/";
+
 const HomeContentItem = props => {
     const post = props.data;
     const initialFavs = props.data.favs;
+
+    const date = Date.parse(post.postDate);
+    const finalDate = new Date(date).toLocaleString("en-US");
 
     const [isFavoriteClick, setIsFavoriteClick] = useState(false);
     const [favsCount, setFavsCount] = useState(initialFavs);
@@ -31,11 +36,13 @@ const HomeContentItem = props => {
 
     return (
         <div className='container'>
-            <div className='container_item'>
-                <div>
+            <div className='container_item mt-6'>
+                <div style={{ width: "100%" }}>
                     <div className='container_writter'>
                         <img src={profile} alt='' />
-                        <p>@kevincarm023</p>
+                        <p
+                            style={{ fontSize: "19px", fontWeight: "bolder" }}
+                        >{`@${post.user.username}`}</p>
                     </div>
                     <hr />
                     <div>
@@ -43,7 +50,7 @@ const HomeContentItem = props => {
                         <div>
                             <img
                                 className=' is-flex is-flex-direction-row is-justify-content-center post_img'
-                                src={post.image}
+                                src={`${FILE_URL}${post.imagePath}`}
                                 alt=''
                             />
                         </div>
@@ -81,9 +88,12 @@ const HomeContentItem = props => {
                                 <p>{post.comments}</p>
                             </div>
                         </div>
-                        <div className="ml-6 columns" style={{width: '200px'}}>
-                            <div className="column is-flex is-flex-direction-row-reverse">
-                                <p>2022-12-05</p>
+                        <div
+                            className='ml-6 columns'
+                            style={{ width: "200px" }}
+                        >
+                            <div className='column is-flex is-flex-direction-row-reverse'>
+                                <p>{finalDate}</p>
                             </div>
                         </div>
                     </div>
