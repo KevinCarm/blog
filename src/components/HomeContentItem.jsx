@@ -5,12 +5,15 @@ import favoriteOff from "../assets/favorite_off.png";
 import favoriteOn from "../assets/favorite_on.png";
 import comments from "../assets/comments.png";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const FILE_URL = "http://localhost:8080/file/";
+const UPDATE_FAVORITES_URL = "http://localhost:8080/favorites";
 
 const HomeContentItem = props => {
     const post = props.data;
-    const initialFavs = props.data.favs;
+    const initialFavs = post.numberFavorites;
+    const jwt = useSelector(state => state.data.jwt_token);
 
     const date = Date.parse(post.postDate);
     const finalDate = new Date(date).toLocaleString("en-US");
@@ -24,12 +27,30 @@ const HomeContentItem = props => {
         setFavsIsTouched(true);
     };
 
+    async function updateFavorites(isToIncrease) {
+        const response = await fetch(UPDATE_FAVORITES_URL, {
+            method: "PUT",
+            body: JSON.stringify({
+                id: post.id,
+                isToIncrease: isToIncrease,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+            },
+        });
+
+        console.log(response);
+    }
+
     useEffect(() => {
         if (favsIsTouched) {
             if (isFavoriteClick) {
                 setFavsCount(c => c + 1);
+                updateFavorites(true);
             } else {
                 setFavsCount(c => c - 1);
+                updateFavorites(false);
             }
         }
     }, [isFavoriteClick]);

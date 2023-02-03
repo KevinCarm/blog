@@ -7,7 +7,7 @@ const HomeContent = () => {
     return (
         <Fragment>
             {initialPosts.map(i => (
-                <HomeContentItem key={new Date().toISOString()} data={i} />
+                <HomeContentItem key={i.id} data={i} />
             ))}
         </Fragment>
     );
