@@ -2,8 +2,12 @@ import "bulma/css/bulma.css";
 import { Fragment, useState } from "react";
 import "./HomePost.css";
 import photoIcon from "../assets/photo.png";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const HomePost = () => {
+    const jwt = useSelector(state => state.data.jwt_token);
+    const history = useHistory();
     const [isPostValid, setIsPostValid] = useState(false);
     const [fileValue, setFileValue] = useState("");
     const [postContent, setPostContent] = useState("");
@@ -26,9 +30,10 @@ const HomePost = () => {
             method: "POST",
             body: formData,
             headers: {
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJST0xFUyI6WyJST0xFX1VTRVIiXSwic3ViIjoia2V2aW5AZW1haWwuY29tIiwiaWF0IjoxNjc0MzI3ODk5LCJleHAiOjE2NzQzNTY2OTl9.y3_mKswGr0r8ZYRFtkIQQ_OiDr-7RUlrkNGxc90nIME`,
+                Authorization: `Bearer ${jwt}`,
             },
         }).then(res => {
+            history.push("/home");
             console.log(res);
         });
     };
