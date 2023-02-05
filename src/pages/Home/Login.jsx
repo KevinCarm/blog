@@ -4,10 +4,12 @@ import logo from "../../assets/logo.png";
 import { Fragment, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { dataActions } from "../../store/dataSlice";
+import { useHistory } from "react-router-dom";
 
 const LOGIN_URL = "http://localhost:8080/login";
 
 const Login = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -63,6 +65,8 @@ const Login = () => {
                 .then(json => {
                     console.log(json.token);
                     dispatch(dataActions.saveJwt(json.token));
+                    dispatch(dataActions.saveIsAuthenticated(true));
+                    history.push("/home");
                 })
                 .catch(err => {
                     setShowAlert(true);
@@ -90,8 +94,11 @@ const Login = () => {
                 className='container main_container box'
             >
                 <div className='is-flex is-flex-direction-column input_container'>
-                    <div className="is-flex is-justify-content-center mb-6">
-                        <img style={{width: '65px', height: '65px'}} src={logo} />
+                    <div className='is-flex is-justify-content-center mb-6'>
+                        <img
+                            style={{ width: "65px", height: "65px" }}
+                            src={logo}
+                        />
                     </div>
                     <div>
                         <h3 className='mb-4'>Login</h3>

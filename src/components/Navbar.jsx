@@ -2,9 +2,22 @@ import { Fragment, useState } from "react";
 import "bulma/css/bulma.css";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Navbar = () => {
+    const isAuth = useSelector(state => state.data.is_authenticated);
     const [menuClick, setMenuClick] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        console.log(isAuth);
+        if (isAuth && isAuth === true) {
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
+    }, [isAuth]);
 
     const menuClasses = `${
         menuClick ? "navbar-burger is-active" : "navbar-burger"
@@ -25,18 +38,20 @@ const Navbar = () => {
                 </a>
             </div>
 
-            <div class='navbar-end mt-6'>
-                <div class='navbar-item '>
-                    <div class='buttons is-flex-direction-row is-justify-content-center'>
-                        <a class='button is-success is-light is-rounded'>
-                            <Link to='/signup'>Sign up</Link>
-                        </a>
-                        <a class='button is-info is-light is-rounded'>
-                            <Link to='/login'>Login</Link>
-                        </a>
+            {!isAuthenticated ? (
+                <div class='navbar-end mt-6'>
+                    <div class='navbar-item '>
+                        <div class='buttons is-flex-direction-row is-justify-content-center'>
+                            <a class='button is-success is-light is-rounded'>
+                                <Link to='/signup'>Sign up</Link>
+                            </a>
+                            <a class='button is-info is-light is-rounded'>
+                                <Link to='/login'>Login</Link>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : null}
         </div>
     );
 
@@ -44,8 +59,14 @@ const Navbar = () => {
         <Fragment>
             <nav class='navbar' role='navigation' aria-label='main navigation'>
                 <div class='navbar-brand'>
-                    <a class='navbar-item' style={{ width: "65px", height: "65px" }}>
-                        <img src={logo} style={{ width: "65px", height: "65px" }} />
+                    <a
+                        class='navbar-item'
+                        style={{ width: "65px", height: "65px" }}
+                    >
+                        <img
+                            src={logo}
+                            style={{ width: "65px", height: "65px" }}
+                        />
                     </a>
 
                     <a
@@ -74,18 +95,20 @@ const Navbar = () => {
                         </a>
                     </div>
 
-                    <div class='navbar-end'>
-                        <div class='navbar-item'>
-                            <div class='buttons'>
-                                <a class='button is-success is-light is-rounded'>
-                                    <Link to='/signup'>Sign up</Link>
-                                </a>
-                                <a class='button is-info is-light is-rounded'>
-                                    <Link to='/login'>Login</Link>
-                                </a>
+                    {!isAuthenticated ? (
+                        <div class='navbar-end'>
+                            <div class='navbar-item'>
+                                <div class='buttons'>
+                                    <a class='button is-success is-light is-rounded'>
+                                        <Link to='/signup'>Sign up</Link>
+                                    </a>
+                                    <a class='button is-info is-light is-rounded'>
+                                        <Link to='/login'>Login</Link>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ) : null}
                 </div>
             </nav>
         </Fragment>

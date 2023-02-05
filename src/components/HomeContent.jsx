@@ -1,32 +1,45 @@
-import { Fragment } from "react";
+import "bulma/css/bulma.css";
+import { Fragment, useEffect, useState } from "react";
 import HomeContentItem from "./HomeContentItem";
-import post from "../assets/post.jpg";
-
-const data = [
-    {
-        id: 43,
-        image: post,
-        favs: 123,
-        content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nam libero justo laoreet sit amet cursus. Tristique senectus et netus et malesuada fames.",
-        comments: 345,
-    },
-    {
-        id: 88,
-        image: post,
-        favs: 87,
-        content:
-            "Odio euismod lacinia at quis risus sed vulputate odio. Eget sit amet tellus cras adipiscing enim eu turpis. Sit amet venenatis urna cursus eget nunc. Blandit massa enim nec dui nunc mattis enim",
-        comments: 12,
-    },
-];
 
 const HomeContent = () => {
+    const [page, setPage] = useState(0);
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        console.log(page);
+        const POSTS_URL = `http://localhost:8080/post?page=${page}`;
+        fetch(POSTS_URL, {
+            method: "GET",
+        })
+            .then(response => response.json())
+            .then(data => {
+                setPosts(prev => {
+                    return [...prev, ...data];
+                });
+            })
+            .catch(err => console.log(err));
+    }, [page]);
+
+    const showMoreClickHandler = () => {
+        setPage(prev => prev + 1);
+    };
+
     return (
         <Fragment>
-            {data.map(post => (
-                <HomeContentItem key={post.id} data={post} />
-            ))}
+            <div>
+                {posts.map(i => (
+                    <HomeContentItem key={i.id} data={i} />
+                ))}
+            </div>
+            <div className='is-flex is-justify-content-center'>
+                <button
+                    onClick={showMoreClickHandler}
+                    className='button is-primary'
+                >
+                    Load more posts
+                </button>
+            </div>
         </Fragment>
     );
 };

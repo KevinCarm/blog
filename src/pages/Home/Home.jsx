@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <Fragment>
             <HomePost />
-            <div className="mt-6"></div>
+            <div className='mt-6'></div>
             <HomeContent />
         </Fragment>
     );
