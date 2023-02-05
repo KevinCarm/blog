@@ -6,6 +6,7 @@ export const dataSlice = createSlice({
         jwt_token: "",
         is_authenticated: false,
         posts: [],
+        page: 0,
     },
     reducers: {
         saveJwt: (state, action) => {
@@ -16,6 +17,9 @@ export const dataSlice = createSlice({
         },
         savePosts(state, action) {
             state.posts = action.payload;
+        },
+        changePage(state, action) {
+            state.page = state.page + 1;
         },
     },
 });

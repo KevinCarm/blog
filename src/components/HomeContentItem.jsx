@@ -14,7 +14,6 @@ const HomeContentItem = props => {
     const post = props.data;
     const initialFavs = post.numberFavorites;
     const jwt = useSelector(state => state.data.jwt_token);
-
     const date = Date.parse(post.postDate);
     const finalDate = new Date(date).toLocaleString("en-US");
 
