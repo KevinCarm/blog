@@ -2,11 +2,10 @@ import "bulma/css/bulma.css";
 import { Fragment, useState } from "react";
 import "./HomePost.css";
 import photoIcon from "../assets/photo.png";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const HomePost = () => {
-    const jwt = useSelector(state => state.data.jwt_token);
+    const jwt = localStorage.getItem("jwt");;
     const history = useHistory();
     const [isPostValid, setIsPostValid] = useState(false);
     const [fileValue, setFileValue] = useState("");

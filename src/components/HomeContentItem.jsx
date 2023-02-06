@@ -5,7 +5,7 @@ import favoriteOff from "../assets/favorite_off.png";
 import favoriteOn from "../assets/favorite_on.png";
 import comments from "../assets/comments.png";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const FILE_URL = "http://localhost:8080/file/";
 const UPDATE_FAVORITES_URL = "http://localhost:8080/favorites";
@@ -13,7 +13,7 @@ const UPDATE_FAVORITES_URL = "http://localhost:8080/favorites";
 const HomeContentItem = props => {
     const post = props.data;
     const initialFavs = post.numberFavorites;
-    const jwt = useSelector(state => state.data.jwt_token);
+    const jwt = localStorage.getItem("jwt");
     const date = Date.parse(post.postDate);
     const finalDate = new Date(date).toLocaleString("en-US");
 
@@ -68,11 +68,13 @@ const HomeContentItem = props => {
                     <div>
                         <p>{post.content}</p>
                         <div>
-                            <img
-                                className=' is-flex is-flex-direction-row is-justify-content-center post_img'
-                                src={`${FILE_URL}${post.imagePath}`}
-                                alt=''
-                            />
+                            <Link to={`/post/${post.id}`}>
+                                <img
+                                    className=' is-flex is-flex-direction-row is-justify-content-center post_img'
+                                    src={`${FILE_URL}${post.imagePath}`}
+                                    alt=''
+                                />
+                            </Link>
                         </div>
                     </div>
                     <div

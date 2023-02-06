@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import "./App.css";
 import Signup from "./pages/Home/Signup";
 import Login from "./pages/Home/Login";
+import ShowPost from "./pages/Home/ShowPost";
 
 function App() {
     const location = useLocation();
@@ -36,6 +37,9 @@ function App() {
                 </Route>
                 <Route path='/profile'>
                     <h2>Profile</h2>
+                </Route>
+                <Route path='/post/:id'>
+                    <ShowPost />
                 </Route>
             </Switch>
         </Fragment>

@@ -7,7 +7,6 @@ const HomeContent = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        console.log(page);
         const POSTS_URL = `http://localhost:8080/post?page=${page}`;
         fetch(POSTS_URL, {
             method: "GET",
