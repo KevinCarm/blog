@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png";
 import { Fragment, useRef, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import user from "../../assets/user.png";
 
 const SIGNUP_URL = "http://localhost:8080/users";
 
@@ -17,6 +18,11 @@ const Signup = () => {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [isFormTouched, setIsFormTouched] = useState(false);
     const [isRequestSending, setIsRequestSending] = useState(false);
+    const [file, setFile] = useState();
+
+    const onFileChangeHandler = event => {
+        setFile(event.target.files[0]);
+    };
 
     const onFormSubmit = event => {
         event.preventDefault();
@@ -62,10 +68,14 @@ const Signup = () => {
                 password: passwordValue,
                 imagePath: "",
             };
+            const formData = new FormData();
+            if (file) {
+                formData.append("file", file);
+            }
+            formData.append("user", JSON.stringify(requestData));
             fetch(SIGNUP_URL, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(requestData),
+                body: formData,
             })
                 .then(response => {
                     setIsRequestSending(false);
@@ -111,6 +121,47 @@ const Signup = () => {
                     </div>
                     <div>
                         <h3 className='mb-4'>Create your account</h3>
+                    </div>
+                    <div className='content mb-3'>
+                        <div className='field'>
+                            <div className='is-flex is-justify-content-center'>
+                                <div
+                                    className='img_select'
+                                    style={{
+                                        position: "relative",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    <img
+                                        src={`${
+                                            file
+                                                ? URL.createObjectURL(file)
+                                                : user
+                                        }`}
+                                        alt=''
+                                        style={{
+                                            objectFit: "cover",
+                                            cursor: "pointer",
+                                            width: "200px",
+                                            height: "200px",
+                                        }}
+                                    />
+                                    <input
+                                        onChange={onFileChangeHandler}
+                                        type='file'
+                                        style={{
+                                            cursor: "pointer",
+                                            opacity: "0.0",
+                                            position: "absolute",
+                                            top: "0",
+                                            bottom: "0",
+                                            right: "0",
+                                            left: "0",
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className='content'>
                         <div className='field'>
